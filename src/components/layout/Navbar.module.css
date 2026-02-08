@@ -1,0 +1,173 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    transition: var(--transition-smooth);
+    background: transparent;
+}
+
+.scrolled {
+    height: 70px;
+    background: rgba(10, 16, 28, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.navContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logoImage {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+    transition: var(--transition-smooth);
+}
+
+@media (min-width: 1024px) {
+    .logoImage {
+        height: 73px;
+    }
+}
+
+.scrolled .logoImage {
+    height: 55px;
+}
+
+.desktopMenu {
+    display: none;
+    align-items: center;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .desktopMenu {
+        display: flex;
+    }
+}
+
+.navLink {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: hsl(var(--text-muted));
+    transition: var(--transition-smooth);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.navLink:hover {
+    color: hsl(var(--primary));
+}
+
+.ctaButton {
+    padding: 0.6rem 1.5rem;
+    background: transparent;
+    border: 1px solid hsl(var(--primary));
+    color: hsl(var(--primary));
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    transition: var(--transition-smooth);
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.ctaButton::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: hsl(var(--primary));
+    transition: var(--transition-smooth);
+    z-index: -1;
+}
+
+.ctaButton:hover {
+    color: #fff;
+}
+
+.ctaButton:hover::before {
+    width: 100%;
+}
+
+.mobileToggle {
+    display: block;
+    color: #fff;
+}
+
+@media (min-width: 1024px) {
+    .mobileToggle {
+        display: none;
+    }
+}
+
+.mobileOverlay {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--header-height));
+    background: hsl(var(--bg-dark));
+    z-index: 999;
+    padding: 2rem;
+}
+
+.mobileLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+}
+
+.mobileLink {
+    font-size: 1.5rem;
+    font-family: 'Bruno Ace SC', sans-serif;
+    color: #fff;
+}
+
+.ctaButtonMobile {
+    width: 100%;
+    padding: 1rem;
+    background: hsl(var(--primary));
+    color: #fff;
+    border-radius: var(--radius-sm);
+    font-weight: bold;
+}
+
+.languageToggle {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.languageToggle:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.4);
+}
