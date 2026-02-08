@@ -51,9 +51,9 @@ export default function Navbar() {
                         <Globe size={20} />
                         <span>{language.toUpperCase()}</span>
                     </button>
-                    <Link href="/signin">
+                    <a href="https://app.adrielssystems.com" target="_blank" rel="noopener noreferrer">
                         <button className={styles.ctaButton}>{t.cta}</button>
-                    </Link>
+                    </a>
                 </div>
 
                 {/* Mobile Menu Toggle */}
@@ -89,9 +89,9 @@ export default function Navbar() {
                                 <Globe size={20} />
                                 {language === 'es' ? 'Cambiar a Inglés' : 'Switch to Spanish'}
                             </button>
-                            <Link href="/signin">
+                            <a href="https://app.adrielssystems.com" target="_blank" rel="noopener noreferrer">
                                 <button className={styles.ctaButtonMobile}>{t.cta}</button>
-                            </Link>
+                            </a>
                         </div>
                     </motion.div>
                 )}
