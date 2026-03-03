@@ -18,7 +18,7 @@ export default function SignInPage() {
                 <div className={styles.logoWrapper}>
                     <Link href="/">
                         <Image
-                            src="/logofinal2.png"
+                            src="/logofinal2.webp"
                             alt="Adriel's Systems"
                             width={400}
                             height={100}

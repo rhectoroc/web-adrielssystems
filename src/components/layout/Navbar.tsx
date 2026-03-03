@@ -31,7 +31,7 @@ export default function Navbar() {
             <div className={`container ${styles.navContainer}`}>
                 <Link href="#inicio" className={styles.logo}>
                     <Image
-                        src="/logofinal2.png"
+                        src="/logofinal2.webp"
                         alt="Adriel's Systems"
                         width={267}
                         height={67}

@@ -41,7 +41,7 @@ export default function Footer() {
                         <div className={styles.logo}>
                             {/* User said "corrige donde va el logo". I will assume they want the image logo if it exists, or a better placement. 
                                 I see `logofinal2.png` in public directory in previous steps. I will use that. */}
-                            <Image src="/logofinal2.png" alt="Adriel's Systems" width={400} height={133} className={styles.footerLogo} />
+                            <Image src="/logofinal2.webp" alt="Adriel's Systems" width={400} height={133} className={styles.footerLogo} />
                         </div>
                         <p className={styles.brandDesc}>
                             {t.desc}
