@@ -4,10 +4,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { Send, X, MessageSquare } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "./Chatbot.module.css";
+import CalendarPicker from "./CalendarPicker";
 
 interface Message {
     text: string;
     sender: "bot" | "user";
+    showCalendar?: boolean;
 }
 
 export default function Chatbot() {
@@ -68,13 +70,10 @@ export default function Chatbot() {
     const formatMessageText = (text: string) => {
         if (!text) return "";
         let formatted = text;
-
-        // Simplified formatting logic based on the user request
         formatted = formatted.replace(/\n\n/g, "<br/><br/>");
         formatted = formatted.replace(/\n/g, "<br/>");
         formatted = formatted.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
         formatted = formatted.replace(/\*(.*?)\*/g, "<em>$1</em>");
-
         return <span dangerouslySetInnerHTML={{ __html: formatted }} />;
     };
 
@@ -92,9 +91,7 @@ export default function Chatbot() {
         try {
             const response = await fetch(webhookUrl, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     sessionId: sessionId,
                     action: "sendMessage",
@@ -104,26 +101,17 @@ export default function Chatbot() {
 
             if (response.ok) {
                 const data = await response.json();
-
-                // Debug: Log the response structure
-                console.log("N8N Response:", data);
-
-                // Try multiple possible response structures
                 const botReply =
-                    data.output ||           // Structure 1
-                    data.response ||         // Structure 2
-                    data.message ||          // Structure 3
-                    data.text ||             // Structure 4
-                    data.data?.output ||     // Nested structure 1
-                    data.data?.response ||   // Nested structure 2
-                    data.data?.message ||    // Nested structure 3
-                    (typeof data === 'string' ? data : null) || // Direct string
-                    "Gracias por tu mensaje. ¿En qué más puedo ayudarte?";
+                    data.response ||
+                    data.output ||
+                    data.message ||
+                    data.text ||
+                    "¿En qué más puedo ayudarte?";
 
-                console.log("Bot Reply:", botReply);
-                setMessages(prev => [...prev, { text: botReply, sender: "bot" }]);
+                const showCalendar = data.showCalendar === true;
+
+                setMessages(prev => [...prev, { text: botReply, sender: "bot", showCalendar }]);
             } else {
-                console.error("HTTP Error:", response.status, response.statusText);
                 throw new Error("Server error");
             }
         } catch (error) {
@@ -132,6 +120,17 @@ export default function Chatbot() {
         } finally {
             setIsTyping(false);
         }
+    };
+
+    // Called by CalendarPicker when a booking is confirmed
+    const handleCalendarBooked = (confirmationMessage: string) => {
+        // Dismiss the calendar from the last bot message and send EVA's follow-up
+        setMessages(prev =>
+            prev.map((msg, idx) =>
+                idx === prev.length - 1 ? { ...msg, showCalendar: false } : msg
+            )
+        );
+        handleSendMessage(undefined, "listo");
     };
 
     return (
@@ -189,8 +188,13 @@ export default function Chatbot() {
                                             <img src="https://cdn1.site-media.eu/images/0/20626320/EvaAvatar-vc9iPwYNg-FnV0MrtYA4Rw.png" alt="Eva" />
                                         </div>
                                     )}
-                                    <div className={styles.messageContent}>
-                                        {formatMessageText(msg.text)}
+                                    <div className={styles.messageBubbleWrapper}>
+                                        <div className={styles.messageContent}>
+                                            {formatMessageText(msg.text)}
+                                        </div>
+                                        {msg.showCalendar && msg.sender === "bot" && (
+                                            <CalendarPicker onBooked={handleCalendarBooked} />
+                                        )}
                                     </div>
                                 </div>
                             ))}

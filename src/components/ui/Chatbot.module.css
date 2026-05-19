@@ -188,6 +188,13 @@
     align-self: flex-start;
 }
 
+.messageBubbleWrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+}
+
 .messageContent {
     padding: 12px 16px;
     border-radius: 18px;
