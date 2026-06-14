@@ -75,14 +75,16 @@ export default function Navbar() {
                         <User size={22} />
                     </a>
 
-                    {/* Menu Toggle (Three lines / X) */}
-                    <button
-                        className={`${styles.menuToggle} ${menuOpen ? styles.menuToggleActive : ""}`}
-                        onClick={() => setMenuOpen(!menuOpen)}
-                        aria-label="Toggle Menu"
-                    >
-                        {menuOpen ? <X size={26} /> : <Menu size={26} />}
-                    </button>
+                    {/* Menu Toggle (Three lines) */}
+                    {!menuOpen && (
+                        <button
+                            className={styles.menuToggle}
+                            onClick={() => setMenuOpen(true)}
+                            aria-label="Open Menu"
+                        >
+                            <Menu size={26} />
+                        </button>
+                    )}
                 </div>
             </div>
 
