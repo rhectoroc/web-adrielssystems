@@ -49,125 +49,187 @@
     height: 55px;
 }
 
-.desktopMenu {
-    display: none;
+.navActions {
+    display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.25rem;
 }
 
-@media (min-width: 1024px) {
-    .desktopMenu {
-        display: flex;
+.actionIconButton {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: hsl(var(--text-main));
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    transition: var(--transition-smooth);
+}
+
+@media (max-width: 640px) {
+    .actionIconButton {
+        padding: 0.5rem;
     }
-}
-
-.navLink {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: hsl(var(--text-muted));
-    transition: var(--transition-smooth);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-}
-
-.navLink:hover {
-    color: hsl(var(--primary));
-}
-
-.ctaButton {
-    padding: 0.6rem 1.5rem;
-    background: transparent;
-    border: 1px solid hsl(var(--primary));
-    color: hsl(var(--primary));
-    border-radius: var(--radius-sm);
-    font-weight: 600;
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    transition: var(--transition-smooth);
-    overflow: hidden;
-    position: relative;
-    z-index: 1;
-}
-
-.ctaButton::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0;
-    height: 100%;
-    background: hsl(var(--primary));
-    transition: var(--transition-smooth);
-    z-index: -1;
-}
-
-.ctaButton:hover {
-    color: #fff;
-}
-
-.ctaButton:hover::before {
-    width: 100%;
-}
-
-.mobileToggle {
-    display: block;
-    color: #fff;
-}
-
-@media (min-width: 1024px) {
-    .mobileToggle {
+    .langText {
         display: none;
     }
 }
 
-.mobileOverlay {
-    position: fixed;
-    top: var(--header-height);
-    left: 0;
-    width: 100%;
-    height: calc(100vh - var(--header-height));
-    background: hsl(var(--bg-dark));
-    z-index: 999;
-    padding: 2rem;
+.actionIconButton:hover {
+    color: hsl(var(--primary));
+    border-color: hsl(var(--primary));
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 0 15px rgba(0, 191, 255, 0.15);
 }
 
-.mobileLinks {
+.langText {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+}
+
+.menuToggle {
+    background: transparent;
+    border: none;
+    color: hsl(var(--text-main));
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    transition: var(--transition-smooth);
+    z-index: 1001;
+}
+
+.menuToggle:hover {
+    color: hsl(var(--primary));
+}
+
+.menuToggleActive {
+    color: hsl(var(--primary));
+}
+
+/* Backdrop */
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 16, 28, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 998;
+}
+
+/* Drawer */
+.drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    background: rgba(10, 16, 28, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+    z-index: 999;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    padding: 2.5rem 2rem;
+}
+
+.drawerHeader {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 1rem;
 }
 
-.mobileLink {
-    font-size: 1.5rem;
+.drawerTitle {
     font-family: 'Bruno Ace SC', sans-serif;
-    color: #fff;
+    font-size: 1.2rem;
+    color: hsl(var(--text-main));
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
 }
 
-.ctaButtonMobile {
+.closeButton {
+    color: hsl(var(--text-muted));
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.closeButton:hover {
+    color: hsl(var(--primary));
+}
+
+.drawerLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex-grow: 1;
+}
+
+.drawerLink {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: hsl(var(--text-muted));
+    transition: var(--transition-smooth);
+    display: block;
+    padding: 0.5rem 0;
+    position: relative;
+    width: fit-content;
+}
+
+.drawerLink::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)));
+    transition: var(--transition-smooth);
+}
+
+.drawerLink:hover {
+    color: hsl(var(--text-main));
+}
+
+.drawerLink:hover::after {
     width: 100%;
-    padding: 1rem;
-    background: hsl(var(--primary));
-    color: #fff;
-    border-radius: var(--radius-sm);
-    font-weight: bold;
 }
 
-.languageToggle {
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+.drawerFooter {
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 1.5rem;
+}
+
+.drawerCta {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    cursor: pointer;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    color: #fff;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    transition: var(--transition-smooth);
+    text-transform: uppercase;
     font-size: 0.9rem;
-    transition: all 0.3s ease;
+    letter-spacing: 0.05em;
 }
 
-.languageToggle:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.4);
+.drawerCta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 191, 255, 0.3);
 }
