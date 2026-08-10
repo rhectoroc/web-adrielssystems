@@ -19,18 +19,19 @@ interface GroupedDay {
 
 interface CalendarPickerProps {
     onBooked: (message: string) => void;
+    prefilledNotes?: string;
 }
 
 type Step = "days" | "times" | "form" | "success";
 
-export default function CalendarPicker({ onBooked }: CalendarPickerProps) {
+export default function CalendarPicker({ onBooked, prefilledNotes }: CalendarPickerProps) {
     const [groupedDays, setGroupedDays] = useState<GroupedDay[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [step, setStep] = useState<Step>("days");
     const [selectedDay, setSelectedDay] = useState<GroupedDay | null>(null);
     const [selectedSlot, setSelectedSlot] = useState<Slot | null>(null);
-    const [form, setForm] = useState({ name: "", email: "", notes: "" });
+    const [form, setForm] = useState({ name: "", email: "", notes: prefilledNotes || "" });
     const [submitting, setSubmitting] = useState(false);
 
     useEffect(() => {
@@ -90,7 +91,7 @@ export default function CalendarPicker({ onBooked }: CalendarPickerProps) {
                 setStep("success");
                 setTimeout(() => {
                     onBooked(
-                        `¡Listo! Ya agendé la cita para ${form.name} el ${selectedDay?.dayLabel} a las ${selectedSlot?.timeLabel}. ¿Quieres que te enviemos la confirmación a ${form.email}?`
+                        `¡Listo! Ya agendé la cita para ${form.name} el ${selectedDay?.dayLabel} a las ${selectedSlot?.timeLabel}. Hemos enviado la invitación a tu correo.`
                     );
                 }, 1500);
             } else {

@@ -10,6 +10,7 @@ interface Message {
     text: string;
     sender: "bot" | "user";
     showCalendar?: boolean;
+    reason?: string;
 }
 
 export default function Chatbot() {
@@ -109,8 +110,9 @@ export default function Chatbot() {
                     "¿En qué más puedo ayudarte?";
 
                 const showCalendar = data.showCalendar === true;
+                const reason = data.reason || "";
 
-                setMessages(prev => [...prev, { text: botReply, sender: "bot", showCalendar }]);
+                setMessages(prev => [...prev, { text: botReply, sender: "bot", showCalendar, reason }]);
             } else {
                 throw new Error("Server error");
             }
@@ -124,13 +126,13 @@ export default function Chatbot() {
 
     // Called by CalendarPicker when a booking is confirmed
     const handleCalendarBooked = (confirmationMessage: string) => {
-        // Dismiss the calendar from the last bot message and send EVA's follow-up
-        setMessages(prev =>
-            prev.map((msg, idx) =>
+        // Dismiss the calendar from the last bot message and append EVA's confirmation
+        setMessages(prev => [
+            ...prev.map((msg, idx) =>
                 idx === prev.length - 1 ? { ...msg, showCalendar: false } : msg
-            )
-        );
-        handleSendMessage(undefined, "listo");
+            ),
+            { text: confirmationMessage, sender: "bot", showCalendar: false }
+        ]);
     };
 
     return (
@@ -193,7 +195,7 @@ export default function Chatbot() {
                                             {formatMessageText(msg.text)}
                                         </div>
                                         {msg.showCalendar && msg.sender === "bot" && (
-                                            <CalendarPicker onBooked={handleCalendarBooked} />
+                                            <CalendarPicker onBooked={handleCalendarBooked} prefilledNotes={msg.reason} />
                                         )}
                                     </div>
                                 </div>
