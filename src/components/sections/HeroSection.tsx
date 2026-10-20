@@ -8,6 +8,7 @@ import styles from "./HeroSection.module.css";
 
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
+import Floating3DParticles from "@/components/ui/Floating3DParticles";
 
 export default function HeroSection() {
     const { language } = useLanguage();
@@ -21,6 +22,16 @@ export default function HeroSection() {
             </div>
             <div className={styles.overlay}></div>
             <div className={styles.gridOverlay}></div>
+
+            <Floating3DParticles
+                quantity={380}
+                color="#00f2ff"
+                size={3.8}
+                opacity={0.35}
+                drift={0.65}
+                depth={0.65}
+                style={{ zIndex: 2 }}
+            />
 
             <div className={`container ${styles.content}`}>
                 <motion.div

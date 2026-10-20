@@ -27,6 +27,7 @@ import { Facebook as FacebookIcon, Instagram as InstagramIcon, Mail, Phone, MapP
 import styles from "./Footer.module.css";
 import { useLanguage } from "@/context/LanguageContext";
 import { translations } from "@/data/translations";
+import OrbitingCircles from "@/components/ui/OrbitingCircles";
 
 export default function Footer() {
     const { language } = useLanguage();
@@ -46,15 +47,41 @@ export default function Footer() {
                         <p className={styles.brandDesc}>
                             {t.desc}
                         </p>
-                        <div className={styles.socials}>
-                            <a href="https://www.facebook.com/profile.php?id=100068244722275" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Facebook"><FacebookIcon size={20} /></a>
-                            <a href="https://www.instagram.com/adrielsystems/" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="Instagram"><InstagramIcon size={20} /></a>
-                            <a href="https://www.tiktok.com/@adrielsystems?lang=es-419" target="_blank" rel="noopener noreferrer" className={styles.socialLink} aria-label="TikTok">
-                                {/* Custom TikTok SVG Icon since Lucide might not have it or I don't want to risk build error */}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
-                                </svg>
-                            </a>
+                        <div className={styles.socialsWrapper}>
+                            <div className={styles.orbitCenterLogo}>
+                                <Code2 size={24} color="#00f2ff" />
+                            </div>
+                            <OrbitingCircles radius={75} duration={16} iconSize={42}>
+                                <a
+                                    href="https://www.facebook.com/profile.php?id=100068244722275"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={styles.socialLink}
+                                    aria-label="Facebook"
+                                >
+                                    <FacebookIcon size={20} />
+                                </a>
+                                <a
+                                    href="https://www.instagram.com/adrielsystems/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={styles.socialLink}
+                                    aria-label="Instagram"
+                                >
+                                    <InstagramIcon size={20} />
+                                </a>
+                                <a
+                                    href="https://www.tiktok.com/@adrielsystems?lang=es-419"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className={styles.socialLink}
+                                    aria-label="TikTok"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                                    </svg>
+                                </a>
+                            </OrbitingCircles>
                         </div>
                     </div>
 

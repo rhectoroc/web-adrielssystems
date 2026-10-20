@@ -29,27 +29,51 @@
     margin-bottom: 1.5rem;
 }
 
-.socials {
+.socialsWrapper {
+    position: relative;
     display: flex;
-    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+    height: 220px;
+    margin-top: 1rem;
+}
+
+.orbitCenterLogo {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0, 242, 255, 0.2) 0%, rgba(2, 6, 23, 0.8) 70%);
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.25);
+    z-index: 2;
 }
 
 .socialLink {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.03);
+    width: 42px;
+    height: 42px;
+    background: rgba(15, 23, 42, 0.85);
+    border: 1px solid rgba(0, 242, 255, 0.3);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: hsl(var(--text-muted));
+    color: #00f2ff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 0 10px rgba(0, 242, 255, 0.2);
+    backdrop-filter: blur(8px);
     transition: var(--transition-smooth);
 }
 
 .socialLink:hover {
     background: hsl(var(--primary));
     color: #fff;
-    transform: translateY(-3px);
+    border-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.6);
+    transform: scale(1.15);
 }
 
 .footerTitle {
